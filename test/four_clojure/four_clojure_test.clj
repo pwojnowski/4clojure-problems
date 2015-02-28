@@ -302,3 +302,17 @@
   (is (= :eq (comparisons (fn [x y] (< (count x) (count y))) "pear" "plum")))
   (is (= :lt (comparisons (fn [x y] (< (mod x 5) (mod y 5))) 21 3)))
   (is (= :gt (comparisons > 0 2))))
+
+(deftest balanced-brackets-test
+  (is (balanced-brackets? "This string has no brackets."))
+  (is (balanced-brackets? "class Test {
+      public static void main(String[] args) {
+        System.out.println(\"Hello world.\");
+      }
+    }"))
+  (is (not (balanced-brackets? "(start, end]")))
+  (is (not (balanced-brackets? "())")))
+  (is (not (balanced-brackets? "[ { ] } ")))
+  (is (balanced-brackets? "([]([(()){()}(()(()))(([[]]({}()))())]((((()()))))))"))
+  (is (not (balanced-brackets? "([]([(()){()}(()(()))(([[]]({}([)))())]((((()()))))))")))
+  (is (not (balanced-brackets? "["))))
