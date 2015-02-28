@@ -232,7 +232,7 @@
 (defn filter-perfect-squares
   [s]
   (clojure.string/join
-   "," 
+   ","
    (filter #(let [i (Integer/parseInt %)
                   x (Math/sqrt i)]
               (and (< 3 i)
@@ -252,6 +252,21 @@
      (if (fn? f)
        (recur (f))
        f)))
+
+;; problem 77 - Anagram finder
+;; Write a function which finds all the anagrams in a vector of words. A word
+;; x is an anagram of word y if all the letters in x can be rearranged in a
+;; different order to form y. Your function should return a set of sets, where
+;; each sub-set is a group of words which are anagrams of each other. Each
+;; sub-set should have at least two words. Words without any anagrams should
+;; not be included in the result.
+(defn anagram-finder [w]
+  (set (->> (group-by sort w)
+            vals
+            (filter #(> (count %) 1))
+            (map set))))
+;; cgrand's solution:
+;; #(->> % (group-by sort) vals (filter next) (map set) set)
 
 ;; problem 78 - Reimplement Trampoline
 ;; Reimplement the function described in "Intro to Trampoline".

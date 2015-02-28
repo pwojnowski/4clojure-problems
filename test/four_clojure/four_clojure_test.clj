@@ -107,6 +107,12 @@
                            #(foo x (+ 2 y))))]
            (trampoline foo [] 1)))))
 
+(deftest anagram-finder-test
+  (is (= (anagram-finder ["meat" "mat" "team" "mate" "eat"])
+         #{#{"meat" "team" "mate"}}))
+  (is (= (anagram-finder ["veer" "lake" "item" "kale" "mite" "ever"])
+         #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})))
+
 (deftest problem-78-reimplement-trampoline-test
   (is (= (letfn [(triple [x] #(sub-two (* 3 x)))
                  (sub-two [x] #(stop?(- x 2)))
