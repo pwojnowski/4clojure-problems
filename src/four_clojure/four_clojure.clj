@@ -275,7 +275,14 @@
 ;; to a number whose squared sum is 1. This is a happy number. An unhappy
 ;; number (or sad number) is one that loops endlessly. Write a function
 ;; that determines if a number is happy or not.
-
+(defn happy-number? [x]
+  (loop [p #{} n x]
+    (if (contains? p n)
+      (= 1 n)
+      (recur (conj p n)
+             (int (reduce
+                   #(-> (Character/getNumericValue %2) (Math/pow 2) (+ %))
+                   0 (str n)))))))
 
 ;; problem 88 - implement set difference
 (fn [a b] (set (into (filter #(not (a %)) b) (filter #(not (b %)) a))))

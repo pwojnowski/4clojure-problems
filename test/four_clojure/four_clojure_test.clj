@@ -126,6 +126,13 @@
   ;; (is (= (perfect-number? 8128) true))
   )
 
+(deftest happy-numbers-test
+  (are [x result] (= (happy-number? x) result)
+       7 true
+       986543210 true
+       2 false
+       3 false))
+
 (deftest test-bintree
   (are [aseq result] (= (bintree? aseq) result)
        '(:a (:b nil nil) nil) true
